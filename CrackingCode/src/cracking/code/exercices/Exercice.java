@@ -12,7 +12,7 @@ import java.util.Set;
 import java.util.Stack;
 
 public class Exercice {
-
+//is it you
 	public boolean isPermutationPalindrome(String s) {
 
 		Set<Character> oddList = new HashSet<>();
