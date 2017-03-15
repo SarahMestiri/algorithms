@@ -12,7 +12,6 @@ import java.util.Set;
 import java.util.Stack;
 
 public class Exercice {
-//is it you
 	public boolean isPermutationPalindrome(String s) {
 
 		Set<Character> oddList = new HashSet<>();
@@ -62,7 +61,7 @@ public class Exercice {
 				}
 			}
 
-			return result ;
+			return result;
 
 		}
 		// delete operation
@@ -81,7 +80,7 @@ public class Exercice {
 				}
 			}
 
-			return result ;
+			return result;
 
 		}
 		return "IMPOSSIBLE";
@@ -765,16 +764,80 @@ public class Exercice {
 		// System.out.println(eq[random.nextInt(eq.length)]);
 		return eq[random.nextInt(eq.length)];
 	}
-	
-	public int smallestNumberNotEqualSubset(int[] A){
-		//where to put element and calculate their sum
+
+	public int smallestNumberNotEqualSubset(int[] A) {
+		// where to put element and calculate their sum
 		Stack<Integer> st = new Stack<Integer>();
 		// calculate all combination of element sum
 		// sort sums of any subet in an array
-		// print the first integer not figuring in the array 
-		//by comparaison between sum[i] - sum[i-1] > 1
-		
+		// print the first integer not figuring in the array
+		// by comparaison between sum[i] - sum[i-1] > 1
+
 		return 0;
+	}
+
+	public int lengthLastWord(String s) {
+		int res = 0;
+		boolean flag = false;
+		for (int i = s.length() - 1; i >= 0; i--) {
+			char c = s.charAt(i);
+			if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+				flag = true;
+				res++;
+			} else {
+				if (flag)
+					return res;
+			}
+		}
+		return res;
+	}
+
+	/**Longest Substring Which Contains 2 Unique Characters**/
+	public String longuestSubUniqueChars(String s) {
+		if (s.length() < 1)
+			return s;
+
+		String res = "";
+
+		// count size
+		int max_size = 0;
+		// Map character occurences
+		HashMap<Character, Integer> mapC = new HashMap<Character, Integer>();
+		// start
+		int start = 0;
+		// start index of longuest substring
+		int start_index = 0;
+		// current size
+		int current_size = 0;
+		// counter Unique char
+		int countU = 0;
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (mapC.containsKey(c)) {
+				mapC.put(c, mapC.get(c) + 1);
+				current_size++;
+			} else {
+				if (countU < 2) {
+					mapC.put(c, 1);
+					current_size++;
+					countU++;
+				} else {
+					if (current_size > max_size) {
+						start_index = start;
+						max_size = current_size;
+					}
+					start++;
+					i = start-1;
+					current_size = 0;
+					countU = 0;
+					mapC.clear();
+					continue;
+				}
+			}
+
+		}
+		res = s.substring(start_index, start_index + max_size);
+		return res;
 	}
 
 }
