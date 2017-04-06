@@ -4,19 +4,19 @@ public class Edge {
 	
 	private String startVertex;
 	private String endVertex;
-	private int weigth;
+	private int weight;
 	
 	/**
-	 * @return the weigth
+	 * @return the weight
 	 */
-	public int getWeigth() {
-		return weigth;
+	public int getWeight() {
+		return weight;
 	}
 	/**
-	 * @param weigth the weigth to set
+	 * @param weigth the weight to set
 	 */
-	public void setWeigth(int weigth) {
-		this.weigth = weigth;
+	public void setWeight(int weight) {
+		this.weight = weight;
 	}
 	/**
 	 * @return the startVertex
