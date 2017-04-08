@@ -1,9 +1,27 @@
 package cracking.structure;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Algorithm {
+	
+	public void removeDups(CustomLinkedList list){
+		HashSet<Integer> set = new HashSet<Integer>();
+		LinkedListNode current = list.getHead();
+		LinkedListNode prev = null;	
+		while(current != null){
+			if(set.contains(current.getData())){
+				current.setNext(current.getNext());
+				prev.setNext(current.getNext());	
+			}		
+			else{
+				set.add(current.getData());
+				prev = current;
+			}
+			current = current.getNext();
+		}
+	}
 
 	public Node[] buildOrder(String[] projects, String[][] dependencies) {
 		Node[] buildOrder = new Node[projects.length];
