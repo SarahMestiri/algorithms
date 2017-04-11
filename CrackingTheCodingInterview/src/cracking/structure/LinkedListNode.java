@@ -29,11 +29,5 @@ public class LinkedListNode {
 	public void setNext(LinkedListNode next){
 		this.next = next;
 	}
-	public String printForward() {
-		if (next != null) {
-			return data + "->" + next.printForward();
-		} else {
-			return ((Integer) data).toString();
-		}
-	}
+
 }

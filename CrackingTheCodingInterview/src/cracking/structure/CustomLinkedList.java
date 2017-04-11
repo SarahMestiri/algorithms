@@ -6,7 +6,7 @@ public class CustomLinkedList {
 	private int size;
 
 	public CustomLinkedList(){
-		
+		this.head = null;
 	}
 	public CustomLinkedList(LinkedListNode headValue) {
 		this.head = headValue;
