@@ -2,7 +2,11 @@ package cracking.structure;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Stack;
 
 public class Algorithm {
 
@@ -57,7 +61,7 @@ public class Algorithm {
 		LinkedListNode prev = null;
 		while (start != null) {
 			prev = start;
-			start = start.getNext();		
+			start = start.getNext();
 		}
 		prev.setNext(list2.getHead());
 	}
@@ -107,5 +111,53 @@ public class Algorithm {
 			}
 		}
 		return start;
+	}
+
+	public boolean isPalindromeList(LinkedList<Integer> list) {
+		boolean isPalindrome = true;
+		Stack<Integer> s = new Stack<Integer>();
+		Iterator<Integer> iterator = list.iterator();
+		// step1: iterate over the list and each put the element in the Stack
+		while (iterator.hasNext()) {
+			s.push(iterator.next());
+		}
+		// step2: pop elements from Stack and compare it while iterating through
+		// the list
+		Iterator<Integer> iterator2 = list.iterator();
+		while (iterator2.hasNext()) {
+			if (s.pop() != iterator2.next()) {
+				return false;
+			}
+		}
+		// for example List = {1,2,5,3}. Stack.pop()=3 do compare 3 == 1 if no
+		// return false else continue
+		// repeat pop() and compare with next element in the List
+		return isPalindrome;
+	}
+	
+	public boolean isPalindromeList(LinkedListNodeMc list) {
+		boolean isPalindrome = true;
+		Stack<Integer> s = new Stack<Integer>();
+		LinkedListNodeMc current = list;
+		//Iterator<Integer> iterator = list.iterator();
+		// step1: iterate over the list and each put the element in the Stack
+		while (current != null) {
+			s.push(current.data);
+			current = current.next;
+		}
+		// step2: pop elements from Stack and compare it while iterating through
+		// the list
+		 current = list;
+		while (current != null) {
+			System.out.println(s.peek());
+			if (s.pop() != current.data) {
+				return false;
+			}
+			current = current.next;
+		}
+		// for example List = {1,2,5,3}. Stack.pop()=3 do compare 3 == 1 if no
+		// return false else continue
+		// repeat pop() and compare with next element in the List
+		return isPalindrome;
 	}
 }
