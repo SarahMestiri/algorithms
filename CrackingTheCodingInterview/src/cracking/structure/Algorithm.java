@@ -134,12 +134,12 @@ public class Algorithm {
 		// repeat pop() and compare with next element in the List
 		return isPalindrome;
 	}
-	
+
 	public boolean isPalindromeList(LinkedListNodeMc list) {
 		boolean isPalindrome = true;
 		Stack<Integer> s = new Stack<Integer>();
 		LinkedListNodeMc current = list;
-		//Iterator<Integer> iterator = list.iterator();
+		// Iterator<Integer> iterator = list.iterator();
 		// step1: iterate over the list and each put the element in the Stack
 		while (current != null) {
 			s.push(current.data);
@@ -147,7 +147,7 @@ public class Algorithm {
 		}
 		// step2: pop elements from Stack and compare it while iterating through
 		// the list
-		 current = list;
+		current = list;
 		while (current != null) {
 			System.out.println(s.peek());
 			if (s.pop() != current.data) {
@@ -160,4 +160,64 @@ public class Algorithm {
 		// repeat pop() and compare with next element in the List
 		return isPalindrome;
 	}
+
+	public int sizeList(CustomLinkedList list) {
+		LinkedListNode current = list.getHead();
+		int s = 0;
+		while (current != null) {
+			current = current.getNext();
+			s++;
+		}
+		return s;
+	}
+
+	// NOTE: not best solution, check the one of the book which considers the
+	// tail of each list and return the node.
+	public int intersectLinkedList(CustomLinkedList list1, CustomLinkedList list2) {
+		// step 1: calculate size list 1
+		int c1 = sizeList(list1);
+		// step 2: calculate size list 2
+		int c2 = sizeList(list2);
+		// step 3: calculate the difference
+		int d = Math.abs(c1 - c2);
+		// step 4: traverse the bigger list until d node
+		LinkedListNode startNode = null;
+		int count = 0;
+		if (c1 > c2) {
+			LinkedListNode current = list1.getHead();
+			if (current == null)
+				return -1;
+			while (current != null && count < d) {
+				current = current.getNext();
+				count++;
+			}
+			startNode = current;
+			LinkedListNode currentS = list2.getHead();
+			while (currentS != null && startNode != null) {
+				if (currentS.getData() == startNode.getData())
+					return currentS.getData();
+				currentS = currentS.getNext();
+				startNode = startNode.getNext();
+			}
+		} else if (c1 <= c2) {
+			LinkedListNode current = list2.getHead();
+			if (current == null)
+				return -1;
+			while (current != null && count < d) {
+				current = current.getNext();
+				count++;
+			}
+			startNode = current;
+
+			LinkedListNode currentS = list1.getHead();
+			while (currentS != null && startNode != null) {
+				if (currentS.getData() == startNode.getData())
+					return currentS.getData();
+				currentS = currentS.getNext();
+				startNode = startNode.getNext();
+			}
+		}
+		return -1;
+	}
+
 }
