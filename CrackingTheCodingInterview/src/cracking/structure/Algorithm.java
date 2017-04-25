@@ -220,4 +220,61 @@ public class Algorithm {
 		return -1;
 	}
 
+	public CustomLinkedList sumList(CustomLinkedList list1, CustomLinkedList list2, int carry) {
+		CustomLinkedList result = new CustomLinkedList();
+		LinkedListNode current1 = list1.getHead();
+		LinkedListNode current2 = list2.getHead();
+		int value = carry;
+		if (current1 != null)
+			value += current1.getData();
+		if (current2 != null)
+			value += current2.getData();
+		result.add((value % 10));
+		list1.setHead(current1.getNext());
+		list2.setHead(current2.getNext());
+		if (list1.getHead() != null && list2.getHead() != null) {
+			CustomLinkedList more = sumList(list1, list2, value >= 10 ? 1 : 0);
+			result.getHead().setNext(more.getHead());
+		}
+		return result;
+	}
+
+	public LinkedListNode loopDetect(CustomLinkedList l) {
+		LinkedListNode slow = l.getHead();
+		LinkedListNode fast = l.getHead();
+		boolean loop = false;
+		while (slow != null && fast != null) {
+			if (slow == fast) {
+				slow = l.getHead();
+				loop = true;
+				break;
+			} else {
+				slow = slow.getNext();
+				fast = fast.getNext().getNext();
+			}
+		}
+		if (loop) {
+			while (slow != fast) {
+				slow = slow.getNext();
+				fast = fast.getNext();
+			}
+
+		} else
+			return null;
+
+		return fast;
+	}
+
+	public void sortStack(Stack<Integer> s) {
+
+	}
+
+	public static int add(int a, int b) {
+		if (b == 0)
+			return a;
+		int sum = a ^ b; // SUM of two integer is A XOR B
+		int carry = (a & b) << 1; // CARRY of two integer is A AND B
+		return add(sum, carry);
+	}
+
 }
